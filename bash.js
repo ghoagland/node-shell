@@ -1,17 +1,16 @@
-process.stdout.write('prompt > ');
+
+var commands = require('./commands');
+
+commands['prompt']();
 
 process.stdin.on('data', function (data) {
-  var cmd = data.toString().trim(); // remove the newline
-  if (cmd === "pwd") pwd();
-  if (cmd === "date") date();
 
-  process.stdout.write('prompt > ');
+  var userCommand = data.toString().trim().split(' ');
+  commands[userCommand[0]](userCommand.slice(1));
+
+  setTimeout(commands['prompt'], 0);
 });
 
-var pwd = function() {
-  console.log(process.cwd(), "testpwd")
-}
 
-var date = function() {
-  console.log(Date())
-}
+
+

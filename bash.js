@@ -5,12 +5,11 @@ commands['prompt']();
 
 process.stdin.on('data', function (data) {
 
-  var userCommand = data.toString().trim().split(' ');
-  commands[userCommand[0]](userCommand.slice(1));
+  var userInput = data.toString().trim().split(' ');
+  var userCommand = userInput[0];
+  var args = userInput.slice(1);
 
-  setTimeout(commands['prompt'], 0);
+  commands[userCommand](args);
+
+  setTimeout(commands['prompt'], 100);
 });
-
-
-
-
